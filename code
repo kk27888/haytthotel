@@ -1,0 +1,539 @@
+#Loading the data
+Feb02 <- read.csv(file = "~/Downloads/out-201402.csv", header = T)
+Feb02
+View(Feb02)
+
+
+
+Feb02 <- data.frame(Feb02$CHECK_IN_DATE_C,Feb02$CHECK_OUT_DATE_C,Feb02$POV_CODE_C,
+                    Feb02$QUOTED_RATE_C,Feb02$PMS_ROOM_REV_USD_C,Feb02$PMS_TOTAL_REV_USD_C,
+                    Feb02$PMS_FOOD_BEVERAGE_REV_USD_C,Feb02$PMS_OTHER_REV_USD_C,
+                    Feb02$ROOM_TYPE_CODE_R,Feb02$ROOM_TYPE_DESCRIPTION_R,Feb02$LENGTH_OF_STAY_R,
+                    Feb02$GUEST_COUNTRY_R,Feb02$REVENUE_USD_R,Feb02$Age_Range_H,Feb02$Clublounge_Used_H,
+                    Feb02$Spa_Used_H,Feb02$Likelihood_Recommend_H,Feb02$Overall_Sat_H,
+                    Feb02$Guest_Room_H,Feb02$Tranquility_H,Feb02$Condition_Hotel_H,Feb02$Customer_SVC_H,
+                    Feb02$Staff_Cared_H,Feb02$Internet_Sat_H,Feb02$Check_In_H,Feb02$F.B_Overall_Experience_H,
+                    Feb02$Hotel.Name.Long_PL,Feb02$Hotel.Name.Short_PL,Feb02$City_PL,Feb02$State_PL,
+                    Feb02$US.Region_PL,Feb02$Postal.Code_PL,Feb02$Country_PL,Feb02$Sub.Continent_PL,
+                    Feb02$Property.Latitude_PL,Feb02$Property.Longitude_PL,Feb02$Guest.NPS.Goal_PL,
+                    Feb02$Relationship_PL,Feb02$All.Suites_PL,Feb02$Bell.Staff_PL,Feb02$Boutique_PL,
+                    Feb02$Business.Center_PL,Feb02$Casino_PL,Feb02$Conference_PL,Feb02$Convention_PL,
+                    Feb02$Dry.Cleaning_PL,Feb02$Elevators_PL,Feb02$Fitness.Center_PL,
+                    Feb02$Fitness.Trainer_PL,Feb02$Golf_PL,Feb02$Indoor.Corridors_PL,Feb02$Laundry_PL,
+                    Feb02$Limo.Service_PL,Feb02$Mini.Bar_PL,Feb02$Pool.Indoor_PL,Feb02$Pool.Outdoor_PL,
+                    Feb02$Regency.Grand.Club_PL,Feb02$Resort_PL,Feb02$Restaurant_PL,Feb02$Self.Parking_PL,
+                    Feb02$Shuttle.Service_PL,Feb02$Ski_PL,Feb02$Spa_PL,Feb02$Spa.services.in.fitness.center_PL,Feb02$Spa.online.booking_PL,Feb02$Spa.F.B.offering_PL,Feb02$Valet.Parking_PL,Feb02$NPS_Type)
+View(Feb02)
+
+
+
+Feb <- Feb02[-which(Feb02$Feb02.NPS_Type == ""),]
+
+Feb <- Feb02[(Feb02$Feb02.Country_PL=="United States"),]
+View(Feb)
+
+colnames(Feb02) <- c("CHECK_IN_DATE_C","CHECK_OUT_DATE_C","POV_CODE_C","QUOTED_RATE_C",
+"PMS_ROOM_REV_USD_C","PMS_TOTAL_REV_USD_C","PMS_FOOD_BEVERAGE_REV_USD_C",
+"PMS_OTHER_REV_USD_C","ROOM_TYPE_CODE_R","ROOM_TYPE_DESCRIPTION_R",
+"LENGTH_OF_STAY_R","GUEST_COUNTRY_R","REVENUE_USD_R","Age_Range_H","Clublounge_Used_H","Spa_Used_H",
+"Likelihood_Recommend_H","Overall_Sat_H","Guest_Room_H","Tranquility_H","Condition_Hotel_H","Customer_SVC_H",
+"Staff_Cared_H","Internet_Sat_H","Check_In_H","F.B_Overall_Experience_H","Hotel.Name.Long_PL","Hotel.Name.Short_PL","City_PL",
+"State_PL","US.Region_PL","Postal.Code_PL","Country_PL","Sub.Continent_PL","Property.Latitude_PL","Property.Longitude_PL",
+"Guest.NPS.Goal_PL","Relationship_PL","All.Suites_PL","Bell.Staff_PL","Boutique_PL","Business.Center_PL","Casino_PL",
+"Conference_PL","Convention_PL","Dry.Cleaning_PL","Elevators_PL","Fitness.Center_PL","Fitness.Trainer_PL","Golf_PL","Indoor.Corridors_PL",
+"Laundry_PL","Limo.Service_PL","Mini.Bar_PL","Pool.Indoor_PL","Pool.Outdoor_PL","Regency.Grand.Club_PL",
+"Resort_PL","Restaurant_PL","Self.Parking_PL","Shuttle.Service_PL","Ski_PL","Spa_PL","Spa.services.in.fitness.center_PL",
+"Spa.online.booking_PL","Spa.F.B.offering_PL","Valet.Parking_PL","NPS_Type")
+
+# Let's give each column the appropriate data type
+
+Feb02$Survey_ID_H <- as.numeric(Feb02$Survey_ID_H)
+Feb02$Length_Stay_H <- as.numeric(Feb02$Length_Stay_H)
+Feb02$Gender_H <- as.factor(Feb02$Gender_H)
+Feb02$Age_Range_H <- as.factor(Feb02$Age_Range_H)
+Feb02$POV_H <- as.factor(Feb02$POV_H)
+Feb02$Num_Adults_H <- as.numeric(Feb02$Num_Adults_H)
+Feb02$Num_Kids_H <- as.numeric(Feb02$Num_Kids_H)
+Feb02$Net_Rev_H <- as.numeric(Feb02$Net_Rev_H)
+Feb02$Clublounge_Used_H <- as.factor(Feb02$Clublounge_Used_H)
+Feb02$Spa_Used_H <- as.factor(Feb02$Spa_Used_H)
+Feb02$Likelihood_Recommend_H <- as.numeric(Feb02$Likelihood_Recommend_H)
+Feb02$Overall_Sat_H <- as.numeric(Feb02$Overall_Sat_H)
+Feb02$Guest_Room_H <- as.numeric(Feb02$Guest_Room_H)
+Feb02$Tranquility_H <- as.numeric(Feb02$Tranquility_H)
+Feb02$Condition_Hotel_H <- as.numeric(Feb02$Condition_Hotel_H)
+Feb02$Customer_SVC_H <- as.numeric(Feb02$Customer_SVC_H)
+Feb02$Staff_Cared_H <- as.numeric(Feb02$Staff_Cared_H)
+Feb02$Internet_Sat_H <- as.numeric(Feb02$Internet_Sat_H)
+Feb02$Check_In_H <- as.numeric(Feb02$Check_In_H)
+
+
+Feb02$State_PL <- state.abb[match(Feb02$State_PL,state.name)]
+
+Feb02<-Feb02[!is.na(Feb02$State_PL),]
+
+length(which(Feb02$NPS_Type=="Promoter"))
+
+length(which(Feb02$NPS_Type=="Detractor"))
+
+test<-Feb02[(Feb02$NPS_Type=="Promoter"),]
+test2<-Feb02[(Feb02$NPS_Type=="Detractor"),]
+
+test3<-Feb02[(Feb02$NPS_Type=="Passive"),]
+
+num <- aggregate(which(Feb02$NPS_Type=="Promoter")~test$State_PL,test,length)
+num
+colnames(num) <- c("State","Promoter")
+num <- num[order(num$State),]
+
+num2 <- aggregate(which(test2$NPS_Type=="Detractor")~test2$State_PL,test2,length)
+num2
+colnames(num2) <- c("State","Detractor")
+num2 <- num2[order(num2$State),]
+
+num3 <- aggregate(which(test3$NPS_Type=="Passive")~test3$State_PL,test3,length)
+num3
+colnames(num3) <- c("State","Passive")
+num3 <- num3[order(num3$State),]
+
+NPState <- merge(num,num3,by="State")
+NPState <- merge(NPState,num2,by="State")
+NPState$Difference <- NPState$Promoter - NPState$Detractor
+NPState$NPSTotal <- NPState$Detractor+NPState$Passive+NPState$Promoter
+NPState$NPS <- (((NPState$Promoter/NPState$NPSTotal)*100) -
+                  ((NPState$Detractor/NPState$NPSTotal)*100))
+NPState$Perc <- NPState$Passive/NPState$NPSTotal
+NPState$PercNeg <- NPState$Detractor/NPState$NPSTotal
+#Maps for USA Based
+
+install.packages("ggplot2")
+
+library(ggplot2)
+
+install.packages("ggmap")
+
+library(ggmap)
+
+install.packages("maps")
+
+library(maps)
+NPState$State <- tolower(state.name[match(NPState$State,state.abb)])
+us <- map_data("state")
+map1 <- ggplot(NPState, aes(map_id = NPState$State))
+map1 <- map1 + geom_map(map = us, color="greenyellow", aes(fill= NPState$NPS))
+map1 <- map1 + expand_limits(x = us$long, y = us$lat)
+map1 <- map1 + coord_map()
+
+map1
+
+
+#Map
+
+library(zipcode)
+
+data("zipcode")
+
+library("ggmap")
+
+library(ggmap)
+datazip = Feb02[c("Postal.Code_PL", "Likelihood_Recommend_H")]
+datazip<-merge(datazip, zipcode, by.x='Postal.Code_PL', by.y='zip')
+map<-get_map(location='united states', zoom=4, maptype= "terrain", source='google',
+             color='bw')
+datamap<-ggmap(map)+geom_point(aes(x=longitude, y = latitude, show_guide = TRUE,
+                                   color = Likelihood_Recommend_H), data = datazip, alpha = .9, na.rm = T)+
+  scale_color_gradient(low= "green", high = "red")
+
+datamap
+
+latlon1 <- geocode("NYC NY")
+mapZoomed1 <- datamap + geom_point(aes(x=latlon1$lon,y=latlon1$lat),color="Blue",size=2)
+mapZoomed1 <- mapZoomed + xlim(latlon1$lon - 10,latlon1$lon + 10) + ylim(latlon1$lat - 10,latlon1$lat + 10) + coord_map()
+mapZoomed1
+
+latlon2 <- geocode("LOS ANGELES CA")
+mapZoomed2 <- datamap + geom_point(aes(x=latlon2$lon,y=latlon2$lat),color="Blue",size=2)
+mapZoomed2 <- mapZoomed + xlim(latlon2$lon - 10,latlon2$lon + 10) + ylim(latlon2$lat - 10,latlon2$lat + 10) + coord_map()
+mapZoomed2
+#Question 2
+
+numnew<-aggregate(which(test$NPS_Type=="Promoter")~test$State_PL+test$Likelihood_Recommend_H+test$Overall_Sat_H+test$Valet.Parking_PL+test$Tranquility_H+test$Internet_Sat_H+test$Property.Latitude_PL+test$Property.Longitude_PL+test$Condition_Hotel_H+test$Business.Center_PL+test$Fitness.Center_PL,test,mean)
+
+num4<- aggregate(which(test$NPS_Type=="Promoter")~test$State_PL+test$Likelihood_Recommend_H, test, length)
+FinalID <- Feb02[(Feb02$State_PL=="ID"),]
+IDData<-data.frame(FinalID$State_PL,FinalID$Likelihood_Recommend_H,
+                   FinalID$Staff_Cared_H,
+                   FinalID$NPS_Type,FinalID$Tranquility_H,FinalID$Condition_Hotel_H,FinalID$Overall_Sat_H,
+                   FinalID$F.B_Overall_Experience_H,FinalID$Customer_SVC_H,FinalID$Internet_Sat_H)
+num3 <- aggregate(.~IDData$FinalID.State_PL+IDData$FinalID.NPS_Type,IDData,mean)
+
+colnames(num3)<- c("State_PL","NPS_Type","State","Likelihood_Recommend_H","Staff","Type","Tranquility_H","Condition_Hotel_H","Overall_Sat_H","F.B_Overall_Experience_H","Customer_SVC_H","Internet_Sat_H")
+
+colnames(IDData)<- c("State","Likelihood_Recommend_H","Staff","Type","Tranquility_H","Condition_Hotel_H","Overall_Sat_H","F.B_Overall_Experience_H","Customer_SVC_H","Internet_Sat_H")
+FinalND <- Feb02[(Feb02$State_PL=="RI"),]
+
+NDdata<- data.frame(FinalND$State_PL,FinalND$Likelihood_Recommend_H,FinalND$Staff_Cared_H,
+             FinalND$NPS_Type,FinalND$Tranquility_H,FinalND$Condition_Hotel_H,FinalND$Overall_Sat_H,FinalND$F.B_Overall_Experience_H,FinalND$Customer_SVC_H,FinalND$Internet_Sat_H)
+num4 <- aggregate(.~NDdata$FinalND.State_PL+NDdata$FinalND.NPS_Type,NDdata,mean)
+colnames(num4)<-c("State_PL","NPS_Type","State","Likelihood_Recommend_H","Staff",
+                  "Type","Tranquility_H","Condition_Hotel_H","Overall_Sat_H","F.B_Overall_Experience_H","
+                  Customer_SVC_H","Internet_Sat_H")
+colnames(NDdata)<-c("State","Likelihood_Recommend_H","Staff",
+                    "Type","Tranquility_H","Condition_Hotel_H","Overall_Sat_H","F.B_Overall_Experience_H","
+                    Customer_SVC_H","Internet_Sat_H")
+finalCompare <- rbind(num3,num4)
+g1<-ggplot(finalCompare, aes(factor(State_PL), Tranquility_H , fill = NPS_Type)) +
+  geom_bar(stat="identity", position = "dodge", color="black") + scale_fill_brewer(palette =
+                                                                                     "Set2") +theme(legend.position = "none")
+
+g1
+
+g2<-ggplot(finalCompare, aes(factor(State_PL), Condition_Hotel_H , fill = NPS_Type))
++ geom_bar(stat="identity", position = "dodge", color="black") + scale_fill_brewer(palette =
+                                                                                     "Set2") +theme(legend.position = "none")
+
+g2
+g3<-ggplot(finalCompare, aes(factor(State_PL), Customer_SVC_H, fill = NPS_Type)) +
+  geom_bar(stat="identity", position = "dodge", color="black") + scale_fill_brewer(palette =
+                                                                                     "Set2")+theme(legend.position = "none")
+g4<-ggplot(finalCompare, aes(factor(State_PL), Staff , fill = NPS_Type)) +
+  geom_bar(stat="identity", position = "dodge", color="black") + scale_fill_brewer(palette =
+                                                                                     "Set2")+theme(legend.position = "none")#cas, conf,conv, resort, restaurant
+install.packages("cowplot")
+
+library(cowplot)
+plot_grid(g1,g2,g3,g4, ncol = 2, nrow = 2)
+NDID1 <-NDID[!is.na(NDID$Tranquility_H),]
+NDID <- rbind(IDData,NDdata)
+NDID1 <-NDID[!is.na(NDID$Tranquility_H),]
+NDID <- rbind(IDData,NDdata)
+# Question 3
+
+cor(NDID$Likelihood_Recommend_H,NDID$Overall_Sat_H)
+
+ND
+
+# Scatterplot: x=overall satisfaction, y=likelihood to recommendation, color=NPS type
+
+df <- NDID[, c("Likelihood_Recommend_H","Overall_Sat_H","Type")]
+
+df$Likelihood_Recommend_H <- df$Likelihood_Recommend_H +
+  runif(nrow(df), min=0, max=1.1)
+
+df$Overall_Sat_H <- df$Overall_Sat_H + runif(nrow(df), min=0, max=1.1)
+
+g8 <- ggplot(data=df, aes(x=Overall_Sat_H))
+
+g8 <- g8 + geom_point(aes(y=Likelihood_Recommend_H, color=Type))
+
+g8
+
+df1 <- NDID[, c("Tranquility_H","Staff","Type")]
+
+df1$Tranquility_H <- df1$Tranquility_H + runif(nrow(df1), min=0, max=1.1)
+
+df1$Staff <- df1$Staff + runif(nrow(df1), min=0, max=1.1)
+
+l <- ggplot(data=df1, aes(x=Staff))
+
+l <- l + geom_point(aes(y=Tranquility_H, color=Type))
+
+#Linear Modeling
+lm<-lm(formula=Months$Likelihood_Recommend_H~ Months$Internet_Sat_H,data =
+         Months)
+
+summary(lm)
+
+lm1<-lm(formula=Months$Likelihood_Recommend_H~ Months$Tranquility_H,data =
+          Months)
+
+summary(lm1)
+
+lm2<-lm(formula=Months$Likelihood_Recommend_H~ Months$Spa_Used_H,data =
+          Months)
+
+summary(lm2)
+
+lm3<-lm(formula=Months$Likelihood_Recommend_H~ Months$Condition_Hotel_H,data =
+          Months)
+
+summary(lm3)
+
+lm4<-lm(formula=Months$Likelihood_Recommend_H~ Months$Staff_Cared_H,data =
+          Months)
+
+summary(lm4)
+
+lm5<-lm(formula=Months$Likelihood_Recommend_H~ Months$Customer_SVC_H,data =
+          Months)
+
+summary(lm5)
+
+lm6<-lm(formula=Months$Likelihood_Recommend_H~
+          Months$Tranquility_H+Months$Internet_Sat_H,data= Months)
+
+summary(lm6)
+
+lm7<-lm(formula=Months$Likelihood_Recommend_H~
+          Months$Customer_SVC_H+Months$Condition_Hotel_H,data = Months)
+
+summary(lm7)
+
+lm8<-lm(formula=Months$Likelihood_Recommend_H~ Months$Customer_SVC_H +
+          Months$Condition_Hotel_H + Months$Staff_Cared_H, data = Months)
+
+summary(lm8)
+
+lm9<-lm(formula=Months$Likelihood_Recommend_H~ Months$Customer_SVC_H +
+          Months$Condition_Hotel_H + Months$Staff_Cared_H + Months$Internet_Sat_H, data =
+          Months)
+
+summary(lm8)
+#Bar Plot for Amenities
+#Linear Model2
+
+#case1
+
+m1 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Staff_Cared_H, data = Feb02)
+summary(m1) #r-square 0.44
+#case2
+m2 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Customer_SVC_H,
+         data = Feb02)
+summary(m2) #r-square 0.51
+#case3
+m3 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Condition_Hotel_H,
+          data = Feb02)
+summary(m3) #r-square 0.452
+#case4
+m4 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Tranquility_H,
+          data = Feb02)
+summary(m4) #r-square 0.32
+#case5
+m5 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Guest_Room_H, data
+          = Feb02)
+summary(m5) #r-square 0.4579
+#case6
+m6 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Overall_Sat_H,
+          data = Feb02)
+
+summary(m6) #r-square 0.80
+
+m7 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Clublounge_Used_H,
+         data = Feb02)
+summary(m7)
+
+m8 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Spa_Used_H,
+         data = Feb02)
+summary(m8)
+
+m9 <- lm(formula = Likelihood_Recommend_H ~ Feb02$Internet_Sat_H,
+         data = Feb02)
+summary(m9)
+
+m10 <- lm(formula = Likelihood_Recommend_H ~ Feb02$F.B_Overall_Experience_H,
+         data = Feb02)
+summary(m10)
+
+
+#Combining all the above cases to predict Likelihood_Recommend_H
+#Likelihood_Recommend_H is predicted using the factors i.e Condition_Hotel_H,Staff_Cared_H,Customer_SVC_H,Guest_Room_H and Overall_Sat_H
+#Storing in variable LRH_Linear
+LRH_Linear <- lm(formula = Likelihood_Recommend_H ~
+                   Condition_Hotel_H+Staff_Cared_H+Customer_SVC_H+Guest_Room_H+Overall_Sat_H+F.B_Overall_Experience_H,
+                 data= Feb02)
+summary(LRH_Linear) # This gives a R-square value as 0.8215 which is close to 1
+
+install.packages("reshape")
+
+library(reshape)
+amenity <- Months[,c("Conference_PL", "Convention_PL", "Dry.Cleaning_PL",
+                     "Elevators_PL","Fitness.Center_PL","Fitness.Trainer_PL", "Golf_PL", "Indoor.Corridors_PL",
+                     "Laundry_PL", "Limo.Service_PL","Mini.Bar_PL", "Pool.Indoor_PL", "Pool.Outdoor_PL",
+                     "Regency.Grand.Club_PL","Resort_PL", "Restaurant_PL", "Self.Parking_PL",
+                     "Shuttle.Service_PL", "Ski_PL", "Spa_PL")]
+amenity <- na.omit(amenity)
+amenity$Spa_PL[amenity$Spa_PL=="Yes"] <- "Y"
+df5 <- data.frame(ColName=character(), Yes=character(), No=character())
+for (column in colnames(amenity)) {
+  contingency <- data.frame(table(amenity[,column]))
+  newrow <- data.frame(ColName=column, Yes=contingency[,2][contingency[,1]=="Y"],No=contingency[,2][contingency[,1]=="N"])
+  df5 <- rbind(df5, newrow)
+  
+}
+df.m <- melt(df5, id.vars="ColName")
+# Bar chart
+g <- ggplot(data=df.m, aes(x=ColName, y=value))
+g <- g + geom_bar(aes(fill=variable), position="dodge", stat="identity")
+g <- g + theme(axis.text.x=element_text(angle=90, hjust=1))
+g <- g + ggtitle("America - Amenity Factors")
+
+g
+
+install.packages("arulesViz")
+
+library(arulesViz)
+
+aruleMonths1 <- data.frame(Months$NPS_Type, Months$Likelihood_Recommend_H,
+                           Months$Boutique_PL,Months$Resort_PL, Months$Limo.Service_PL,
+                           Months$Fitness.Center_PL,Months$Laundry_PL,Months$Mini.Bar_PL,Months$Self.Parking_
+                           PL,Months$Valet.Parking_PL, Months$Shuttle.Service_PL)
+
+aruleMonths1$Months.NPS_Type<-as.factor(aruleMonths1$Months.NPS_Type)
+
+aruleMonths1$Months.Likelihood_Recommend_H<-
+  as.factor(aruleMonths1$Months.Likelihood_Recommend_H)
+
+#aruleMonths$Months.Overall_Sat_H<-as.factor(aruleMonths$Months.Overall_Sat_H)
+ruleset <- apriori(arulenewMayDec, parameter = list(support=0.1, confidence=0.8))
+
+plot(ruleset)
+goodrules <- rulesDetractor[quality(rulesDetractor)$lift>2]
+
+inspect(goodrules)
+
+plot(goodrules)
+
+#promoter
+rulesPromoter<-apriori(aruleMonths, parameter = list(support=0.4,
+                                                     confidence=0.4),appearance = list(rhs = 'Months.NPS_Type=Promoter', default='lhs'))
+
+inspect(rulesPromoter)
+
+plot(rulesPromoter)
+plot(rulesPromoter, method="paracoord",control=list(reorder=TRUE))
+plot(rulesPromoter, method="graph",control=list(type="items"))
+
+summary(rulesPromoter)
+
+#detractori[b,]
+rulesDetractor<-apriori(aruleMonths, parameter = list(support=0.015,
+                                                      confidence=0.3),appearance = list(rhs = 'Months.NPS_Type=Detractor', default='lhs'))
+
+inspect(rulesDetractor)
+
+plot(rulesDetractor)
+
+summary(rulesDetractor)
+plot(goodrules, method="graph",control=list(type="items"))
+
+#Map
+
+library(zipcode)
+
+data("zipcode")
+
+library("ggmap")
+
+library(ggmap)
+datazip = Feb02[c("Postal.Code_PL", "Likelihood_Recommend_H")]
+datazip<-merge(datazip, zipcode, by.x='Postal.Code_PL', by.y='zip')
+map<-get_map(location='united states', zoom=4, maptype= "terrain", source='google',
+             color='bw')
+datamap<-ggmap(map)+geom_point(aes(x=longitude, y = latitude, show_guide = TRUE,
+                                   color = Likelihood_Recommend_H), data = datazip, alpha = .9, na.rm = T)+
+  scale_color_gradient(low= "green", high = "red")
+
+datamap
+
+latlon1 <- geocode("NYC NY")
+mapZoomed1 <- datamap + geom_point(aes(x=latlon1$lon,y=latlon1$lat),color="Blue",size=2)
+mapZoomed1 <- mapZoomed + xlim(latlon1$lon - 10,latlon1$lon + 10) + ylim(latlon1$lat - 10,latlon1$lat + 10) + coord_map()
+mapZoomed1
+
+latlon2 <- geocode("LOS ANGELES CA")
+mapZoomed2 <- datamap + geom_point(aes(x=latlon2$lon,y=latlon2$lat),color="Blue",size=2)
+mapZoomed2 <- mapZoomed + xlim(latlon2$lon - 10,latlon2$lon + 10) + ylim(latlon2$lat - 10,latlon2$lat + 10) + coord_map()
+mapZoomed2
+
+#Map
+
+library(zipcode)
+
+data("zipcode")
+
+library("ggmap")
+
+library(ggmap)
+datazip = Feb02[c("Postal.Code_PL", "Likelihood_Recommend_H")]
+datazip<-merge(datazip, zipcode, by.x='Postal.Code_PL', by.y='zip')
+map<-get_map(location='united states', zoom=4, maptype= "terrain", source='google',
+             color='bw')
+datamap<-ggmap(map)+geom_point(aes(x=longitude, y = latitude, show_guide = TRUE,
+                                   color = Likelihood_Recommend_H), data = datazip, alpha = .9, na.rm = T)+
+  scale_color_gradient(low= "green", high = "red")
+
+datamap
+
+latlon1 <- geocode("NYC NY")
+mapZoomed1 <- datamap + geom_point(aes(x=latlon1$lon,y=latlon1$lat),color="Blue",size=2)
+mapZoomed1 <- mapZoomed + xlim(latlon1$lon - 10,latlon1$lon + 10) + ylim(latlon1$lat - 10,latlon1$lat + 10) + coord_map()
+mapZoomed1
+
+latlon2 <- geocode("LOS ANGELES CA")
+mapZoomed2 <- datamap + geom_point(aes(x=latlon2$lon,y=latlon2$lat),color="Blue",size=2)
+mapZoomed2 <- mapZoomed + xlim(latlon2$lon - 10,latlon2$lon + 10) + ylim(latlon2$lat - 10,latlon2$lat + 10) + coord_map()
+mapZoomed2
+
+latlon3 <- geocode("New Orleans LA")
+mapZoomed3 <- datamap + geom_point(aes(x=latlon3$lon,y=latlon3$lat),color="Blue",size=2)
+mapZoomed3 <- mapZoomed + xlim(latlon3$lon - 10,latlon3$lon + 10) + ylim(latlon3$lat - 10,latlon3$lat + 10) + coord_map()
+mapZoomed3
+
+#SVM
+svmSeason<-data.frame(Months$State_PL,
+                      Months$NPS_Type,Months$Likelihood_Recommend_H, Months$Customer_SVC_H,
+                      Months$Staff_Cared_H, Months$Internet_Sat_H,
+                      Months$Bell.Staff_PL,Months$Business.Center_PL,Months$Convention_PL,Months$Spa_PL
+                      ,Months$Fitness.Center_PL)
+svmSeason<-svmSeason[!is.na(svmSeason$Months.State_PL),]
+
+svmSeason<-
+  svmSeason[!is.na(svmSeason$Months.Likelihood_Recommend_H)&!is.na(svmSeason$Mont
+                                                                   hs.Customer_SVC_H)&!is.na(svmSeason$Months.Staff_Cared_H)&!is.na(svmSeason$Month
+                                                                                                                                    s.Internet_Sat_H)&!is.na(svmSeason$Months.Bell.Staff_PL)&!is.na(svmSeason$Months.Busi
+                                                                                                                                                                                                    ness.Center_PL)&!is.na(svmSeason$Months.Convention_PL)&!is.na(svmSeason$Months.Sp
+                                                                                                                                                                                                                                                                  a_PL)&!is.na(svmSeason$Months.Fitness.Center_PL),]
+svmSeason <- svmSeason[(svmSeason$Months.Likelihood_Recommend_H>=3),]
+
+svmSeason<-
+  svmSeason[!(svmSeason$Months.Bell.Staff_PL=="")&!(svmSeason$Months.Convention_PL
+                                                    =="")&!(svmSeason$Months.Business.Center_PL=="")&!(svmSeason$Months.Spa_PL=="")&
+              !(svmSeason$Months.Fitness.Center_PL==""),]
+
+random.indexes<-sample(1:nrow(svmSeason))
+
+cutpoint<- floor(nrow(svmSeason)/3*2)
+svmSeason.train <- svmSeason[random.indexes[1:cutpoint],]
+
+svmSeason.test<-svmSeason[random.indexes[(cutpoint+1):nrow(svmSeason)],]
+
+install.packages("e1071")
+
+library(e1071)
+
+install.packages("kernlab")
+
+library(kernlab)
+
+modelsvmSeason<-
+  ksvm(svmSeason.train$Months.Likelihood_Recommend_H~.,data=svmSeason.train,
+       cost=0.1, scale=FALSE)
+
+modelsvmSeason
+#Naive Bayes
+kOutput <-
+  naiveBayes(svmMay.train$newMayData.NPS_Type~svmMay.train$newMayData.ROOM_TY
+             PE_CODE_R,data=svmMay.train)
+kPred <- predict(kOutput,svmMay.test,type="class")
+
+print(kOutput)
+results <- table(svmMay.test$newMayData.NPS_Type, kPred)
+
+results[3,3]
+
+length(kPred)
+totalCorrect <- results[2,2]+results[3,3]+results[4,4]
+
+totalInTest <- nrow(svmMay.test)
+percent <- totalCorrect/totalInTest
+percent
