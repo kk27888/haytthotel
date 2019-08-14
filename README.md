@@ -8,12 +8,12 @@ The project was undertaken in the subject IST 687 – Applied Data Science at iS
 
 NPS Conception
 --------------
-Net Promoter Score measures customer experience and predicts business growth. It transforms the business world by providing the core measurement for customer experience management programs. The NPS assess to what extent a respondent would recommend a certain company, product or service to his friends, relatives or colleagues.
-NPS = %Promoters - %Detractors
-Respondents are grouped as follows:
-● Promoters (score 9-10) are loyal enthusiasts who will keep buying and refer others, fueling growth. 
-● Passives (score 7-8) are satisfied but unenthusiastic customers who are vulnerable to competitive offerings. 
-● Detractors (score 0-6) are unhappy customers who can damage your brand and impede growth through negative word-of-mouth.
+Net Promoter Score measures customer experience and predicts business growth. It transforms the business world by providing the core measurement for customer experience management programs. The NPS assess to what extent a respondent would recommend a certain company, product or service to his friends, relatives or colleagues.<br>
+NPS = %Promoters - %Detractors<br>
+Respondents are grouped as follows:<br>
+● Promoters (score 9-10) are loyal enthusiasts who will keep buying and refer others, fueling growth. <br>
+● Passives (score 7-8) are satisfied but unenthusiastic customers who are vulnerable to competitive offerings. <br>
+● Detractors (score 0-6) are unhappy customers who can damage your brand and impede growth through negative word-of-mouth.<br>
 It is used by various companies for promotional offers and marketing as it provides a summary of the customer’s experience at the hotel. It determines what factors influence whether a customer would become either a promoter or detractor. By using the NPS type for analysis, Hyatt can understand its customer base and can focus on those specific groups for profit.
 
 
@@ -24,17 +24,17 @@ The aim of this project is to determine factors which could help Hyatt corporati
 
 METHODOLOGY
 -----------
-The following steps were followed to achieve the objectives:
-● Data Extraction and Extrapolation
-● Data Cleaning and Preparation
-● Data Modeling
-● Data Visualization
-● Validation of the modeled data
-● Recommendations based on analysis
+The following steps were followed to achieve the objectives:<br>
+● Data Extraction and Extrapolation<br>
+● Data Cleaning and Preparation<br>
+● Data Modeling<br>
+● Data Visualization<br>
+● Validation of the modeled data<br>
+● Recommendations based on analysis<br>
 
 RESULTS and RECOMMENDATIONS
 ---------------------------
-● Facilities like Guest rooms and customer service should be maintained at the same levein order to continue being recommended by other customers.
-● Idaho| Delaware |Nebraska |Washington |Tennessee are the states with lowest NPS score, therefore work on improving NPS score from these states.
-● Work more on the parameters affecting age groups of 26-45, as they are the major detractors in the United States.
-● Based on our predictive analysis we derive that facilities like boutique, fitness centre, laundry room, resort, limo-service and mini-bar have a high significance on NPS score.
+● Facilities like Guest rooms and customer service should be maintained at the same levein order to continue being recommended by other customers.<br>
+● Idaho| Delaware |Nebraska |Washington |Tennessee are the states with lowest NPS score, therefore work on improving NPS score from these states.<br>
+● Work more on the parameters affecting age groups of 26-45, as they are the major detractors in the United States.<br>
+● Based on our predictive analysis we derive that facilities like boutique, fitness centre, laundry room, resort, limo-service and mini-bar have a high significance on NPS score.<br>
